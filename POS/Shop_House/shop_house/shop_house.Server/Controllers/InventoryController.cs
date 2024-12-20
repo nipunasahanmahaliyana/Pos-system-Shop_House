@@ -45,8 +45,8 @@ namespace shop_house.Server.Controllers
 
                     // Step 2: Insert into products table
                     string insertProductQuery = @"
-                    INSERT INTO [shop_house_pos].[dbo].[products]
-                    ([name], [description], [price], [category_id], [image])
+                    INSERT INTO products
+                    (name, description, price, category_id, image)
                     VALUES (@Name, @Description, @Price, @CategoryId, @Image)";
 
                     using (SqlCommand insertCommand = new SqlCommand(insertProductQuery, connection))

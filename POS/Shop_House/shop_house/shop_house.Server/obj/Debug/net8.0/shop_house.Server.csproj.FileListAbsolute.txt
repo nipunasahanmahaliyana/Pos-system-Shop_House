@@ -41,3 +41,4 @@ D:\pos-system\POS\Shop_House\shop_house\shop_house.Server\bin\Debug\net8.0\runti
 D:\pos-system\POS\Shop_House\shop_house\shop_house.Server\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 D:\pos-system\POS\Shop_House\shop_house\shop_house.Server\bin\Debug\net8.0\BCrypt.Net-Next.dll
 D:\pos-system\POS\Shop_House\shop_house\shop_house.Server\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\pos-system\POS\Shop_House\shop_house\shop_house.Server\obj\Debug\net8.0\shop_house.Server.sourcelink.json

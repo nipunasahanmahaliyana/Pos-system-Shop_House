@@ -5,6 +5,8 @@ using System.Data.SqlClient;
 
 namespace shop_house.Server.Controllers
 {
+    //[Route("/api/[controller]")]
+    [ApiController]
     public class CartController : Controller
     {
         private readonly string _connectionString;
@@ -79,6 +81,45 @@ namespace shop_house.Server.Controllers
                 throw new Exception("An unexpected error occurred while adding the item to the cart.", ex);
 
             }
+        }
+
+        
+        [HttpGet]
+        [Route("/api/[controller]/GetCartItem")]
+        public async Task<IActionResult> GetCartItem(string cartid,int cusid)
+        {
+            Cart CartItem = null;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (SqlCommand command = new SqlCommand("SELECT * FROM Cart WHERE CartId=@cartid AND Customer_RefNo=@cusid", connection))
+                {
+                    command.Parameters.AddWithValue("@cartid", cartid);
+                    command.Parameters.AddWithValue("@cusid", cusid);
+
+                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                           CartItem = new Cart
+                            {
+                                CartId = reader.GetString(reader.GetOrdinal("CartId")),//Using GetOrdinal ensures you are referencing the correct column, even if its order changes.
+                                UserId = reader.GetInt32(reader.GetOrdinal("UserId")),
+                                ProductName = reader.GetString(reader.GetOrdinal("ProductName")),
+                                Quantity = reader.GetInt32(reader.GetOrdinal("Quantity")),
+                                Price = reader.GetDecimal(reader.GetOrdinal("Price")),
+                                DateAdded = reader.GetDateTime(reader.GetOrdinal("DateAdded")),
+                                CategoryName = reader.GetString(reader.GetOrdinal("CategoryName")),
+                                Customer_RefNo = reader.GetString(reader.GetOrdinal("Customer_RefNo"))
+                            };
+
+                        }
+                    }
+                }
+            }
+
+            return Ok(CartItem);
         }
     }
 }
