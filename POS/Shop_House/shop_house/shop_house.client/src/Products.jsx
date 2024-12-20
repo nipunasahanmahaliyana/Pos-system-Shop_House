@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Input, notification, Modal, Select, message, Drawer, Table } from 'antd';
 import { ShoppingCartOutlined, DeleteOutlined, UserAddOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import axios from 'axios';
@@ -94,7 +94,7 @@ const ProductsPage = () => {
 
             // Store CartId and CustomerId in session storage
             sessionStorage.setItem("CartId", finalCartId);
- 
+            
     }
 
     // Call the fetchProducts function when the component mounts

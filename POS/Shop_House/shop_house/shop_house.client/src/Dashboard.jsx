@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     DollarCircleOutlined,
     ShoppingCartOutlined,
     UserOutlined,
     PlusCircleOutlined,
     MinusCircleOutlined,
-    InfoCircleOutlined,
+    //InfoCircleOutlined,
 } from '@ant-design/icons';
 import { Table, Button, InputNumber, notification, Modal } from 'antd';
+
+const cart_id = sessionStorage.getItem("CartId");
+const customer_id =sessionStorage.getItem("CustomerId");
+
 
 const Dashboard = () => {
     const [checkoutItems, setCheckoutItems] = useState([]);
@@ -175,7 +179,16 @@ const Dashboard = () => {
                 {/* Checkout Items */}
                 <div className="bg-white shadow-lg p-6 rounded-lg">
                     <h3 className="text-2xl font-semibold mb-4 text-black">Items in Cart</h3>
+                    {customer_id !== "-" && cart_id !== "-" ? (
+                        <>
+                            <h1 className="text-sm text-green-600 font-bold">Customer ID: {customer_id}</h1>
+                            <h1 className="text-sm text-green-600 font-bold">Cart ID: {cart_id}</h1>
+                        </>
+                    ) : (
+                        <p>No Customer walked in</p>
+                    )}
 
+                    
                     {checkoutItems.length > 0 ? (
                         <ul className="space-y-2">
                             {checkoutItems.map((item, index) => (
